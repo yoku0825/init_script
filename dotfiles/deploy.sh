@@ -7,7 +7,11 @@ function deploy_for_user
   local user="$1"
   for f in $(ls $workdir/*) ; do
     [ "$(basename $f)" = "$(basename $0)" ] && continue
-    ln -sf "$f" "~$1/.$(basename $f)"
+    if [ "$user" = "root" ] ; then
+      ln -sf "$f" "/root/.$(basename $f)"
+    else
+      ln -sf "$f" "/home/$user/.$(basename $f)"
+    fi
   done
 }
 
