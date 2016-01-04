@@ -1,0 +1,53 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+export PS1="[\u@\h \W]\$ "
+export EDITOR=vim
+export PATH="/usr/local/heroku/bin:$PATH"
+
+alias docker="/usr/local/bin/docker_wrap.sh"
+alias d="docker"
+alias cpanm="sudo /usr/local/bin/cpanm"
+alias perl="rlwrap -zpipeto perl -M'feature qw/say/' -MData::Dumper"
+
+alias mysql51="/usr/mysql/5.1.73/bin/mysql --default-character-set=utf8 -S /usr/mysql/5.1.73/data/mysql.sock -P 64051 --prompt=\"mysql51> \""
+alias mysqladmin51="/usr/mysql/5.1.73/bin/mysqladmin --default-character-set=utf8 -S /usr/mysql/5.1.73/data/mysql.sock -P 64051"
+alias mysqldump51="/usr/mysql/5.1.73/bin/mysqldump --default-character-set=utf8 -S /usr/mysql/5.1.73/data/mysql.sock -P 64051"
+
+alias mysql55="/usr/mysql/5.5.47/bin/mysql -S /usr/mysql/5.5.47/data/mysql.sock -P 64055 --prompt=\"mysql55> \""
+alias mysqladmin55="/usr/mysql/5.5.47/bin/mysqladmin -S /usr/mysql/5.5.47/data/mysql.sock -P 64055"
+alias mysqldump55="/usr/mysql/5.5.47/bin/mysqldump -S /usr/mysql/5.5.47/data/mysql.sock -P 64055"
+
+alias mysql56="/usr/mysql/5.6.28/bin/mysql -S /usr/mysql/5.6.28/data/mysql.sock -P 64056 --prompt=\"mysql56> \""
+alias mysqladmin56="/usr/mysql/5.6.28/bin/mysqladmin -S /usr/mysql/5.6.28/data/mysql.sock -P 64056"
+alias mysqldump56="/usr/mysql/5.6.28/bin/mysqldump -S /usr/mysql/5.6.28/data/mysql.sock -P 64056"
+
+alias mysql57="/usr/mysql/5.7.10/bin/mysql -S /usr/mysql/5.7.10/data/mysql.sock -P 64057 --prompt=\"mysql57> \""
+alias mysqladmin57="/usr/mysql/5.7.10/bin/mysqladmin -S /usr/mysql/5.7.10/data/mysql.sock -P 64057"
+alias mysqldump57="/usr/mysql/5.7.10/bin/mysqldump -S /usr/mysql/5.7.10/data/mysql.sock -P 64057"
+
+function multi
+{
+  case "$1" in
+    "restart")
+      shift
+      mysqld_multi stop $*
+      sleep 3
+      mysqld_multi start $*
+      ;;
+    *)
+      mysqld_multi $*
+      ;;
+  esac
+}
+
+function heroku
+{
+  /usr/local/heroku/bin/heroku "$@" --app desolate-crag-9309
+}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
