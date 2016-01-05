@@ -15,4 +15,4 @@ else
   ### Other, maybe Amazon Linux
   version="amazon"
 
-f
+fi
