@@ -26,3 +26,8 @@ case "$version" in
     rm *.rpm
     ;;
 esac
+
+. $workdir/../package/cpanm.sh
+[ -x /usr/local/bin/cpanm ] && cpanm="/usr/local/bin/cpanm"
+[ -x /usr/bin/cpanm ] && cpanm="/usr/bin/cpanm"
+$cpanm Text::MeCab
