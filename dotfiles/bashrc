@@ -16,4 +16,6 @@ alias perl="perl -M'feature qw/say/' -MData::Dumper"
 alias ls="ls --color"
 alias ll="ls -l"
 
-. .bashrc2
+if [ -f ~/.bashrc2 ] ; then
+  . ~/.bashrc2
+fi
