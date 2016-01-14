@@ -10,7 +10,7 @@ export EDITOR=vim
 export GOPATH=/usr/local
 
 alias d="/usr/local/bin/docker_wrap.sh"
-alias g="git"
+alias g="/usr/local/bin/git_wrap.sh"
 alias cpanm="sudo /usr/local/bin/cpanm"
 alias perl="perl -M'feature qw/say/' -MData::Dumper"
 alias ls="ls --color"
