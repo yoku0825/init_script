@@ -9,8 +9,8 @@ export PS1="[\u@\h \W]\$ "
 export EDITOR=vim
 export GOPATH=/usr/local
 
-alias docker="/usr/local/bin/docker_wrap.sh"
-alias d="docker"
+alias d="/usr/local/bin/docker_wrap.sh"
+alias g="git"
 alias cpanm="sudo /usr/local/bin/cpanm"
 alias perl="perl -M'feature qw/say/' -MData::Dumper"
 alias ls="ls --color"
