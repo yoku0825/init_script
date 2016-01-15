@@ -8,9 +8,9 @@ function deploy_for_user
   for f in $(ls $workdir/*) ; do
     [ "$(basename $f)" = "$(basename $0)" ] && continue
     if [ "$user" = "root" ] ; then
-      ln -sf "$f" "/root/.$(basename $f)"
+      ln -s "$f" "/root/.$(basename $f)"
     else
-      ln -sf "$f" "/home/$user/.$(basename $f)"
+      ln -s "$f" "/home/$user/.$(basename $f)"
     fi
   done
 }
