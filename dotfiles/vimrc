@@ -4,7 +4,16 @@ set expandtab
 set wrap
 set display=lastline
 set bg=dark
+set backspace=indent,eol,start
 autocmd QuickFixCmdPost *grep* cwindow
+
+augroup redhat
+  autocmd BufRead *.txt set tw=78
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+  \   exe "normal! g'\"" |
+  \ endif
+augroup END
 
 map <C-q> <C-w><C-w><C-w>q
 map <C-g> :Gtags -g 
