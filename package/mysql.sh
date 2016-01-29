@@ -5,14 +5,14 @@ workdir=$(cd $(dirname $0) ; pwd)
 
 case "$version" in
   "5")
-    echo "TODO"
+    yum install -y http://dev.mysql.com/get/mysql57-community-release-el5-7.noarch.rpm
     ;;
   "6"|"amazon")
     yum install -y http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
-    yum install -y mysql-community-server
     ;;
   "7")
-    echo "TODO"
+    yum install -y http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
     ;;
 esac
 
+yum install -y mysql-community-server
