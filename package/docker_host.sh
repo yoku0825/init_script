@@ -5,7 +5,8 @@ workdir=$(cd $(dirname $0) ; pwd)
 
 case "$version" in
   "5")
-    echo "TODO"
+    echo "Unsupported!!!"
+    exit 1
     ;;
   "6")
     yum install -y epel-release
@@ -13,11 +14,13 @@ case "$version" in
     service docker start
     ;;
   "7")
-    echo "7"
+    yum install -y docker-io
+    systemctl start docker.service
     ;;
   "amazon")
     yum install -y docker
     service docker start
+    ;;
   "*")
     echo "Failed $version"
     ;;
