@@ -14,7 +14,10 @@ case "$version" in
     perl -e "install App::cpanminus" -MCPAN
     ;;
   "7")
-    echo "7"
+    curl -L cpanmin.us | perl - App::cpanminus
+    ;;
+  "amazon")
+    echo "TODO:"
     ;;
   "*")
     echo "Failed $version"
