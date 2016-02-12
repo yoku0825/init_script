@@ -15,7 +15,7 @@ case "$version" in
     ;;
 esac
 
-yum install -y mysql-community-devel
+yum install -y mysql-community-devel git automake libtool
 git clone https://github.com/akopytov/sysbench.git
 
 pushd sysbench
