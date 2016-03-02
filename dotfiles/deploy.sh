@@ -17,14 +17,28 @@ function deploy_for_user
   for f in $(ls $workdir/*) ; do
     [ "$(basename $f)" = "$(basename $0)" ] && continue
     if [ "$user" = "root" ] ; then
-      ln -s $force "$f" "/root/.$(basename $f)"
+      homedir="/root"
     else
-      ln -s $force "$f" "/home/$user/.$(basename $f)"
+      homedir="/home/$user"
     fi
+    ln -s $force "$f" "$homedir/.$(basename $f)"
   done
+  vim_for_perl
 }
 
+function vim_for_perl
+{
+  vimdir="$homedir/.vim"
+  [ -d "$vimdir" ] || mkdir "$vimdir"
+  pushd "$vimdir"
+  git clone git://github.com/gmarik/vundle.git vundle
+  echo "Startup vim and exec ':BundleInstall'"
+  popd
 
+  dictdir="$vimdir/dict"
+  [ -d "$dictdir" ] || mkdir "$dictdir"
+  wget -q https://raw.github.com/Cside/dotfiles/master/.vim/dict/perl.dict -O "$dictdir/perl.dict"
+}
 
 if [ "$#" = "0" ] ; then
   deploy_for_user "$USER"
