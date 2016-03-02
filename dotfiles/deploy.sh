@@ -16,7 +16,7 @@ function deploy_for_user
   local user="$1"
   for f in $(ls $workdir/*) ; do
     [ "$(basename $f)" = "$(basename $0)" ] && continue
-    if [ "$user" = "root" ] ; then
+    if [ "$user" = "root" || -z "$user" ] ; then
       homedir="/root"
     else
       homedir="/home/$user"
