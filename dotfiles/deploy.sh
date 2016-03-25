@@ -31,13 +31,16 @@ function vim_for_perl
   vimdir="$homedir/.vim"
   [ -d "$vimdir" ] || mkdir "$vimdir"
   pushd "$vimdir"
-  git clone git://github.com/gmarik/vundle.git vundle
-  echo "Startup vim and exec ':BundleInstall'"
+  if [ ! -d vundle ] ; then
+    git clone git://github.com/gmarik/vundle.git vundle
+    echo "Startup vim and exec ':BundleInstall'"
+  fi
   popd
 
   dictdir="$vimdir/dict"
   [ -d "$dictdir" ] || mkdir "$dictdir"
-  wget -q https://raw.github.com/Cside/dotfiles/master/.vim/dict/perl.dict -O "$dictdir/perl.dict"
+  perldic="$dictdir/perl.dict"
+  [ -e "$perldic" ] || wget -q https://raw.github.com/Cside/dotfiles/master/.vim/dict/perl.dict -O "$dictdir/perl.dict"
 }
 
 if [ "$#" = "0" ] ; then
