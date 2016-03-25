@@ -1,5 +1,8 @@
 #!/bin/bash
 
+workdir=$(cd $(dirname $0) ; pwd)
+. $workdir/../common.sh
+
 case "$version" in
   "5")
     echo "TODO"
