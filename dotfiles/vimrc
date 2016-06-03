@@ -48,8 +48,8 @@ Bundle 'petdance/vim-perl'
 Bundle 'hotchpotch/perldoc-vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
+Bundle 'Shougo/neosnippet-snippets'
 Bundle 'thinca/vim-quickrun'
-
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -88,6 +88,12 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 " for snippets
 imap <expr><C-k> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-n>"
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
+let g:neocomplcache_enable_at_startup = 1 
+
+augroup filetypedetect
+  autocmd! BufNewFile,BufRead *.t setf perl
+  autocmd! BufNewFile,BufRead *.psgi setf perl
+augroup END
 
 
 " Anywhere SID.
