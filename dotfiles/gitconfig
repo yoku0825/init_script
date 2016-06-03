@@ -1,3 +1,5 @@
 [user]
 	name = yoku0825
 	email = yoku0825@gmail.com
+[push]
+	default = current
