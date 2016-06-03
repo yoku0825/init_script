@@ -10,11 +10,24 @@ export EDITOR=vim
 export GOPATH=/usr/local
 
 alias d="/usr/local/bin/docker_wrap.sh"
-alias g="/usr/local/bin/git_wrap.sh"
 alias cpanm="sudo /usr/local/bin/cpanm"
 alias perl="rlwrap perl -M'feature qw/say/' -MData::Dumper"
 alias ls="ls --color"
 alias ll="ls -l"
+
+if [ -x /usr/local/bin/git_wrap.sh ] ; then
+  alias g="/usr/local/bin/git_wrap.sh"
+else
+  alias g="git"
+fi
+alias use="git checkout"
+
+function gc
+{
+  git checkout master
+  git branch -d $(git branch | grep -v master)
+}
+
 
 if [ -f ~/.bashrc2 ] ; then
   . ~/.bashrc2
