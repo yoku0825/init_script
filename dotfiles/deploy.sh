@@ -16,6 +16,7 @@ function deploy_for_user
   local user="$1"
   for f in $(ls $workdir/*) ; do
     [ "$(basename $f)" = "$(basename $0)" ] && continue
+    [ "$(basename $f)" = "my.cnf" ] && continue
     if [ "$user" = "root" -o -z "$user" ] ; then
       homedir="/root"
     else
