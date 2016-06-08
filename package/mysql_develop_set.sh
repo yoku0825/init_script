@@ -8,7 +8,7 @@ case "$version" in
     echo "TODO"
     ;;
   "6"|"amazon")
-    yum install -y cmake make gcc gcc-c++ ncurses-devel bison
+    yum install -y cmake make gcc gcc-c++ ncurses-devel bison libaio-devel numactl-devel 
     ;;
   "7")
     echo "TODO"
