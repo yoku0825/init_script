@@ -3,6 +3,12 @@ set history save on
 set history size 10000
 set history filename ~/.gdb_history
 set print pretty on
+set print array on
+set print array-indexes on
+set print elements 4096
 set print frame-arguments all
 #set print static-members off
 #set charset ascii
+set logging file gdb.log
+set logging on
+set trace-commands on
