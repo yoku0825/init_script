@@ -16,7 +16,7 @@ case "$version" in
     ;;
 esac
 
-yum install -y mecab mecab-devel mecab-ipadic
+yum install -y mecab mecab-devel mecab-ipadic gcc
 
 . $workdir/../package/cpanm.sh
 [ -x /usr/local/bin/cpanm ] && cpanm="/usr/local/bin/cpanm"
