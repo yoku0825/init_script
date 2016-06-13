@@ -7,10 +7,10 @@ case "$version" in
   "5")
     yum install -y http://packages.groonga.org/centos/5/x86_64/Packages/groonga-release-1.1.0-0.noarch.rpm
     ;;
-  "6"|"amazon")
+  "6"|"amazon"|"7")
     yum install -y http://packages.groonga.org/centos/6/x86_64/Packages/groonga-release-1.1.0-1.noarch.rpm
     ;;
-  "7"|*)
+  *)
     echo "Does not support yet"
     exit 1;
     ;;
