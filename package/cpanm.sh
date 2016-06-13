@@ -14,7 +14,7 @@ case "$version" in
     perl -e "install App::cpanminus" -MCPAN
     ;;
   "7")
-    yum install -y perl-ExtUtils-MakeMaker perl-Data-Dumper make
+    yum install -y gcc perl-ExtUtils-Embed perl-ExtUtils-MakeMaker perl-Data-Dumper make
     curl -L cpanmin.us | perl - App::cpanminus
     ;;
   "amazon")
