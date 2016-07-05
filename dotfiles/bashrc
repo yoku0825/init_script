@@ -11,7 +11,7 @@ export GOPATH=/usr/local
 
 alias d="/usr/local/bin/docker_wrap.sh"
 alias cpanm="sudo /usr/local/bin/cpanm"
-alias perl="rlwrap perl -M'feature qw/say/' -MData::Dumper"
+alias perl="rlwrap perl -M'feature qw/say/' -MData::Dumper -MDBI -M'Digest::MD5 qw/md5_hex/'"
 alias ls="ls --color"
 alias ll="ls -l"
 
