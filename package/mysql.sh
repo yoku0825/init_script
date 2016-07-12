@@ -15,4 +15,4 @@ case "$version" in
     ;;
 esac
 
-yum install -y mysql-community-server
+yum install -y mysql-community-server mysql-community-devel
