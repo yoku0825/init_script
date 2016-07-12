@@ -1,5 +1,8 @@
 #!/bin/bash
 
+. $(cd $(dirname $0) ; pwd)/pip.sh
+pip install pygments
+
 yum install -y tar wget make gcc ncurses-devel
 mkdir build
 pushd build
