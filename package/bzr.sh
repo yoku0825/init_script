@@ -19,6 +19,6 @@ case "$version" in
     rm -r build
     ;;
   "7"|*)
-    echo "TODO"
+    yum install -y bzr
     ;;
 esac
