@@ -8,11 +8,11 @@ case "$version" in
     echo "TODO"
     ;;
   "6"|"amazon")
-    yum install -y cmake make gcc gcc-c++ ncurses-devel bison libaio-devel numactl-devel 
+    yum install -y cmake make gcc gcc-c++ ncurses-devel bison libaio-devel numactl-devel yum-utils
     debuginfo-install -y libstdc++ libgcc glibc zlib openssl-libs libcom_err pcre
     ;;
   "7")
-    yum install -y cmake make gcc gcc-c++ ncurses-devel bison libaio-devel numactl-devel 
+    yum install -y cmake make gcc gcc-c++ ncurses-devel bison libaio-devel numactl-devel yum-utils
     debuginfo-install -y libstdc++ libgcc glibc zlib openssl-libs libcom_err pcre
     ;;
 esac
