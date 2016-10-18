@@ -11,6 +11,9 @@ case "$version" in
     yum install -y epel-release
     yum install -y golang-bin
     ;;
+  "7")
+    yum install -y golang
+    ;;
   *)
     echo "TODO"
     ;;
