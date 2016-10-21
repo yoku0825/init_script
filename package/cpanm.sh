@@ -9,7 +9,7 @@ case "$version" in
     curl -L cpanmin.us | perl - App::cpanminus
     ;;
   "6")
-    yum install -y perl-CPAN gcc perl-Module-Build perl-ExtUtils-Embed 
+    yum install -y perl-CPAN gcc perl-Module-Build perl-ExtUtils-Embed perl-parent
     echo -e "\n o conf build_requires_install_policy yes\n o conf prerequisites_policy follow\n o conf commit" | cpan
     perl -e "install App::cpanminus" -MCPAN
     ;;
