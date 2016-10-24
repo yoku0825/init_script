@@ -25,3 +25,4 @@ case "$version" in
     ;;
 esac
 
+yum cleanup all
