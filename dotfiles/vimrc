@@ -5,6 +5,8 @@ set wrap
 set display=lastline
 set bg=dark
 set backspace=indent,eol,start
+set splitbelow
+set splitright
 autocmd QuickFixCmdPost *grep* cwindow
 
 augroup redhat
@@ -139,3 +141,4 @@ map <silent> [Tag]x :tabclose<CR>
 map <silent> [Tag]n :tabnext<CR>
 " tn 次のタブ
 map <silent> [Tag]p :tabprevious<CR>
+nmap <C-l> <plug>(quickrun)
