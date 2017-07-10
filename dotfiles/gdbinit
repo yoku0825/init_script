@@ -12,3 +12,7 @@ set print frame-arguments all
 set logging file gdb.log
 set logging on
 set trace-commands on
+define xxd
+  dump binary memory dump.bin $arg0 $arg0+$arg1
+  shell xxd dump.bin
+end
