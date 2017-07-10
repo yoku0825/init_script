@@ -20,6 +20,7 @@ map <C-g> :Gtags -g
 map <C-h> :Gtags -f %<CR>
 map <C-j> :GtagsCursor<CR>
 map <C-k> :Gtags -r
+map <C-m> :NERDTreeToggle<CR>
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
@@ -50,6 +51,7 @@ Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/neosnippet'
 Bundle 'Shougo/neosnippet-snippets'
 Bundle 'thinca/vim-quickrun'
+Bundle 'scrooloose/nerdtree'
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
