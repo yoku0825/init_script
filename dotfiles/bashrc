@@ -15,6 +15,7 @@ alias cpanm="sudo /usr/local/bin/cpanm"
 alias perl="rlwrap perl -MData::Dumper -MDBI -M'Digest::MD5 qw{md5_hex}' -M'FindBin qw{\$Bin}'"
 alias ls="ls --color"
 alias ll="ls -l"
+alias remote_ip="curl -s http://api.aoikujira.com/ip/json | jq -r .REMOTE_ADDR"
 
 if [ -x /usr/local/bin/git_wrap.sh ] ; then
   alias g="/usr/local/bin/git_wrap.sh"
