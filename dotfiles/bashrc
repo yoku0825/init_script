@@ -8,10 +8,11 @@ fi
 export PS1="[\u@\h \W]\$ "
 export EDITOR=vim
 export GOPATH=/usr/local
+export SANDBOX_BINARY=/usr/mysql
 
 alias d="/usr/local/bin/docker_wrap.sh"
 alias cpanm="sudo /usr/local/bin/cpanm"
-alias perl="rlwrap perl -M'feature qw/say/' -MData::Dumper -MDBI -M'Digest::MD5 qw/md5_hex/'"
+alias perl="rlwrap perl -MData::Dumper -MDBI -M'Digest::MD5 qw{md5_hex}' -M'FindBin qw{\$Bin}'"
 alias ls="ls --color"
 alias ll="ls -l"
 
@@ -21,13 +22,6 @@ else
   alias g="git"
 fi
 alias use="git checkout"
-
-function gc
-{
-  git checkout master
-  git branch -d $(git branch | grep -v master)
-}
-
 
 if [ -f ~/.bashrc2 ] ; then
   . ~/.bashrc2
