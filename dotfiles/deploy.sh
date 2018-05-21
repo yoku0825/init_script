@@ -51,3 +51,5 @@ else
     deploy_for_user $u
   done
 fi
+
+exit 0
