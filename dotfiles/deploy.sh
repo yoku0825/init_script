@@ -37,11 +37,6 @@ function vim_for_perl
     echo "Startup vim and exec ':BundleInstall'"
   fi
   popd
-
-  dictdir="$vimdir/dict"
-  [ -d "$dictdir" ] || mkdir "$dictdir"
-  perldic="$dictdir/perl.dict"
-  [ -e "$perldic" ] || wget -q https://raw.github.com/Cside/dotfiles/master/.vim/dict/perl.dict -O "$dictdir/perl.dict"
 }
 
 if [ "$#" = "0" ] ; then
@@ -51,3 +46,5 @@ else
     deploy_for_user $u
   done
 fi
+
+exit 0

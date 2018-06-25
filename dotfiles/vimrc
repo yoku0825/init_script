@@ -3,11 +3,17 @@ set autoindent
 set expandtab
 set wrap
 set display=lastline
-set bg=dark
 set backspace=indent,eol,start
 set splitbelow
 set splitright
 set enc=utf8
+
+set term=screen-256color
+set t_ut=
+syntax enable
+colorscheme default
+set bg=dark
+
 autocmd QuickFixCmdPost *grep* cwindow
 
 augroup redhat
@@ -30,8 +36,8 @@ augroup BinaryXXD
   autocmd!
   autocmd BufReadPost * if &binary | silent %!xxd -g 1
   autocmd BufReadPost * set ft=xxd | endif
-  autocmd BufWritePre * if &binary | %!xxd -r | endif
-  autocmd BufWritePost * if &binary | silent %!xxd -g 1
+  autocmd BufWritePre * if &binary | exe "%!xxd -r" | endif
+  autocmd BufWritePost * if &binary | silent exe "%!xxd -g 1"
   autocmd BufWritePost * set nomod | endif
 augroup END
 
