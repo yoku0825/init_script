@@ -23,6 +23,7 @@ else
   alias g="git"
 fi
 alias use="git checkout"
+alias rebase="git rebase"
 
 if [ -f ~/.bashrc2 ] ; then
   . ~/.bashrc2
