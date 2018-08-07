@@ -4,10 +4,16 @@ set autoindent
 set expandtab
 set wrap
 set display=lastline
-set bg=dark
 set backspace=indent,eol,start
 set splitbelow
 set splitright
+
+set term=screen-256color
+set t_ut=
+syntax enable
+colorscheme default
+set bg=dark
+
 autocmd QuickFixCmdPost *grep* cwindow
 
 augroup redhat
