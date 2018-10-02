@@ -33,7 +33,7 @@ function vim_for_perl
   [ -d "$vimdir" ] || mkdir "$vimdir"
   pushd "$vimdir"
   if [ ! -d vundle ] ; then
-    git clone git://github.com/gmarik/vundle.git vundle
+    git clone https://github.com/VundleVim/Vundle.vim.git vundle
     echo "Startup vim and exec ':BundleInstall'"
   fi
   popd
