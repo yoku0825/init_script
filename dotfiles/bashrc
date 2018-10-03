@@ -9,6 +9,8 @@ export PS1="[\u@\h \W]\$ "
 export EDITOR=vim
 export GOPATH=/usr/local
 export SANDBOX_BINARY=/usr/mysql
+export LESSCHARSET="utf-8"
+umask 022
 
 alias d="/usr/local/bin/docker_wrap.sh"
 alias perl="rlwrap perl -MData::Dumper -MDBI -M'Digest::MD5 qw{md5_hex}' -M'FindBin qw{\$Bin}'"
