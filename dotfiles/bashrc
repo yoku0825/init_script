@@ -23,6 +23,7 @@ else
 fi
 alias use="git checkout"
 alias rebase="git rebase"
+alias ptags="gtags --gtagslabel=pygments"
 
 if [ -f ~/.bashrc2 ] ; then
   . ~/.bashrc2
