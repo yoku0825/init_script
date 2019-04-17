@@ -17,7 +17,7 @@ colorscheme default
 set bg=dark
 
 autocmd QuickFixCmdPost *grep* cwindow
-autocmd VimEnter * NERDTreeToggle
+" autocmd VimEnter * NERDTreeToggle
 
 augroup redhat
   autocmd BufRead *.txt set tw=78
