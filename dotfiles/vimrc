@@ -8,6 +8,7 @@ set backspace=indent,eol,start
 set splitbelow
 set splitright
 set enc=utf8
+set hidden
 
 set term=screen-256color
 set t_ut=
@@ -16,6 +17,7 @@ colorscheme default
 set bg=dark
 
 autocmd QuickFixCmdPost *grep* cwindow
+autocmd VimEnter * NERDTreeToggle
 
 augroup redhat
   autocmd BufRead *.txt set tw=78
@@ -151,3 +153,5 @@ map <silent> [Tag]n :tabnext<CR>
 " tn 次のタブ
 map <silent> [Tag]p :tabprevious<CR>
 nmap <C-l> <plug>(quickrun)
+
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
