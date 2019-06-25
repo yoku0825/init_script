@@ -30,3 +30,12 @@ alias ptags="gtags --gtagslabel=pygments"
 if [ -f ~/.bashrc2 ] ; then
   . ~/.bashrc2
 fi
+
+function ssh
+{
+  if [[ $@ == "" ]] ; then
+    /usr/bin/ssh $(grep -iE "^host[[:space:]]+[^*]" ~/.ssh/config | peco | awk "{print \$2}")
+  else
+    /usr/bin/ssh "$@"
+  fi
+} 
