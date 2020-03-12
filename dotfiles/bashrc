@@ -39,3 +39,52 @@ function ssh
     /usr/bin/ssh "$@"
   fi
 } 
+
+function ec2
+{
+  cmd="$(aws ec2 describe-instances | \
+           perl -MJSON -E \
+           '
+             my @out= <>;
+             my $json= from_json(join("", @out));
+
+             print "multi_ssh -l centos -i ~/.ssh/virginia.pem ";
+             foreach my $instance_list (@{$json->{Reservations}})
+             {
+               $instance_list= $instance_list->{Instances};
+               print join(" ", map { $_->{PublicIpAddress} } @$instance_list);
+               print " ";
+             }
+             print "\n";
+           ')"
+  $cmd
+}
+
+function ec2p
+{
+  cmd="$(ec2desc | peco | awk '{print $2}')"
+  ssh -l centos -i ~/.ssh/virginia.pem $cmd
+}
+
+function ec2desc
+{
+  aws ec2 describe-instances | \
+    perl -MJSON -E \
+    '
+      my @out= <>;
+      my $json= from_json(join("", @out));
+
+      foreach my $instance_list (@{$json->{Reservations}})
+      {
+        $instance_list= $instance_list->{Instances};
+        foreach (map { +{ pub   => $_->{PublicIpAddress},
+                          pri   => $_->{PrivateIpAddress},
+                          type  => $_->{InstanceType},
+                          state => $_->{State}->{Name},
+                        } } @$instance_list)
+        {
+          printf("%s\t%s\t%s\t%s\n", $_->{pri}, $_->{pub}, $_->{type}, $_->{state});
+        }
+      }
+    '
+} 
