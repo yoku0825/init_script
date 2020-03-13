@@ -95,8 +95,8 @@ function ec2launch
 {
   local count="$1"
   aws ec2 run-instances \
-    --launch-template '{"LaunchTemplateId":"lt-0f7c7bc76d7def1b9","Version":"4"}' \
-    --subnet="subnet-07d42e08853545754" \
+    --launch-template "$ec2launch_template" \
+    --subnet="$ec2launch_subnet" \
     --count=$count
 }
 
