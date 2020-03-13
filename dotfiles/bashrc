@@ -17,7 +17,7 @@ alias perl="rlwrap perl -MData::Dumper -MDBI -M'Digest::MD5 qw{md5_hex}' -M'Find
 alias ls="ls --color"
 alias ll="ls -l"
 alias remote_ip="curl -s http://api.aoikujira.com/ip/json | jq -r .REMOTE_ADDR"
-alias tsadd="stdbuf -oL awk '{print strftime("[%Y/%m/%d %H:%M:%S] "), $0}'
+alias tsadd="stdbuf -oL awk '{print strftime(\"[%Y/%m/%d %H:%M:%S] \"), $0}'"
 
 if [ -x /usr/local/bin/git_wrap.sh ] ; then
   alias g="/usr/local/bin/git_wrap.sh"
@@ -82,9 +82,10 @@ function ec2desc
                           pri   => $_->{PrivateIpAddress},
                           type  => $_->{InstanceType},
                           state => $_->{State}->{Name},
+                          id    => $_->{InstanceId},
                         } } @$instance_list)
         {
-          printf("%s\t%s\t%s\t%s\n", $_->{pri}, $_->{pub}, $_->{type}, $_->{state});
+          printf("%s\t%s\t%s\t%s\t%s\n", $_->{pri}, $_->{pub}, $_->{type}, $_->{state}, $_->{id});
         }
       }
     '
@@ -97,4 +98,9 @@ function ec2launch
     --launch-template '{"LaunchTemplateId":"lt-0f7c7bc76d7def1b9","Version":"4"}' \
     --subnet="subnet-07d42e08853545754" \
     --count=$count
+}
+
+function ec2term
+{
+  aws ec2 terminate-instances --instance-ids $(ec2desc | awk '{print $5}')
 }
