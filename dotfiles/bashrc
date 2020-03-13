@@ -17,6 +17,7 @@ alias perl="rlwrap perl -MData::Dumper -MDBI -M'Digest::MD5 qw{md5_hex}' -M'Find
 alias ls="ls --color"
 alias ll="ls -l"
 alias remote_ip="curl -s http://api.aoikujira.com/ip/json | jq -r .REMOTE_ADDR"
+alias tsadd="stdbuf -oL awk '{print strftime("[%Y/%m/%d %H:%M:%S] "), $0}'
 
 if [ -x /usr/local/bin/git_wrap.sh ] ; then
   alias g="/usr/local/bin/git_wrap.sh"
