@@ -64,6 +64,7 @@ function ec2
 function ec2p
 {
   cmd="$(ec2desc | peco | awk '{print $2}')"
+  echo ssh -l centos -i ~/.ssh/virginia.pem $cmd
   ssh -l centos -i ~/.ssh/virginia.pem $cmd
 }
 
