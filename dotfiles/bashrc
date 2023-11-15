@@ -5,19 +5,21 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+export LANG=C
 export PS1="[\u@\h \W]\$ "
 export EDITOR=vim
-export GOPATH=/usr/local
+export GOPATH=/home/yoku0825/go
 export SANDBOX_BINARY=/usr/mysql
+export IGNORE_MYLOGIN_CNF=1
 export LESSCHARSET="utf-8"
 umask 022
 
 alias d="/usr/local/bin/docker_wrap.sh"
-alias perl="rlwrap perl -MData::Dumper -MDBI -M'Digest::MD5 qw{md5_hex}' -M'FindBin qw{\$Bin}'"
+alias perl="rlwrap perl -M'List::Util qw{max}' -MData::Dumper -MDBI -M'Digest::MD5 qw{md5_hex}' -M'FindBin qw{\$Bin}' -MJSON"
 alias ls="ls --color"
 alias ll="ls -l"
 alias remote_ip="curl -s http://api.aoikujira.com/ip/json | jq -r .REMOTE_ADDR"
-alias tsadd="stdbuf -oL awk '{print strftime(\"[%Y/%m/%d %H:%M:%S] \"), $0}'"
+alias tsadd="stdbuf -oL awk '{print strftime(\"[%Y/%m/%d %H:%M:%S] \"), \$0}'"
 
 if [ -x /usr/local/bin/git_wrap.sh ] ; then
   alias g="/usr/local/bin/git_wrap.sh"
@@ -105,3 +107,22 @@ function ec2term
 {
   aws ec2 terminate-instances --instance-ids $(ec2desc | awk '{print $5}')
 }
+
+function echo_green
+{
+  local msg="$*"
+  echo -e "\033[32m${msg}\033[0m"
+}
+
+
+function echo_red
+{
+  local msg="$*"
+  echo -e "\033[31m${msg}\033[0m"
+}
+
+function dmysql
+{
+  docker run -d -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" --restart=on-failure mysql/mysql-server:$1
+}
+
