@@ -123,6 +123,14 @@ function echo_red
 
 function dmysql
 {
-  docker run -d -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" --restart=on-failure mysql/mysql-server:$1
-}
+  version_str="$1"
+  [[ -z $version_str ]] && version_str="latest"
+  version_int=$(echo $version_str | awk -F"[.-]" '{printf("%d%02d%02d\n", $1, $2, $3)}')
 
+  if [[ $version_str = "latest" || $version_int -ge 80022 ]] ; then
+    repo="container-registry.oracle.com/mysql/community-server"
+  else
+    repo="mysql/mysql-server"
+  fi
+  docker run -d -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" $repo:$1
+}
