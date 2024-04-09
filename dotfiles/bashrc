@@ -124,6 +124,7 @@ function echo_red
 function dmysql
 {
   version_str="$1"
+  shift
   [[ -z $version_str ]] && version_str="latest"
   version_int=$(echo $version_str | awk -F"[.-]" '{printf("%d%02d%02d\n", $1, $2, $3)}')
 
@@ -132,5 +133,5 @@ function dmysql
   else
     repo="mysql/mysql-server"
   fi
-  docker run -d -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" $repo:$1
+  docker run -d -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" $repo:$version_str $@
 }
