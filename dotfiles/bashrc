@@ -133,5 +133,14 @@ function dmysql
   else
     repo="mysql/mysql-server"
   fi
-  docker run -d -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" $repo:$version_str $@
+  docker run -d --restart=on-failure -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" $repo:$version_str $@
 }
+
+function w3mcat
+{
+  w3m -T text/html "$1" | cat
+}
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+export PATH=$PATH:~/.atuin/bin
+which atuin > /dev/null 2>&1 && eval "$(atuin init bash --disable-up-arrow)"

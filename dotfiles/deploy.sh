@@ -17,6 +17,7 @@ function deploy_for_user
   for f in $(ls $workdir/*) ; do
     [ "$(basename $f)" = "$(basename $0)" ] && continue
     [ "$(basename $f)" = "my.cnf" ] && continue
+    [ "$(basename $f)" = "atuin.config.toml" ] && continue
     if [ "$user" = "root" -o -z "$user" ] ; then
       homedir="/root"
     else
@@ -25,6 +26,7 @@ function deploy_for_user
     ln -s $force "$f" "$homedir/.$(basename $f)"
   done
   vim_for_perl
+  install_atuin
 }
 
 function vim_for_perl
@@ -37,6 +39,12 @@ function vim_for_perl
     echo "Startup vim and exec ':BundleInstall'"
   fi
   popd
+}
+
+function install_atuin
+{
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+  ln -s $PWD/atuin.config.toml ~/.config/atuin/config.toml
 }
 
 if [ "$#" = "0" ] ; then
