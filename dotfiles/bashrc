@@ -34,86 +34,11 @@ if [ -f ~/.bashrc2 ] ; then
   . ~/.bashrc2
 fi
 
-function ssh
-{
-  if [[ $@ == "" ]] ; then
-    /usr/bin/ssh $(grep -iE "^host[[:space:]]+[^*]" ~/.ssh/config | peco | awk "{print \$2}")
-  else
-    /usr/bin/ssh "$@"
-  fi
-} 
-
-function ec2
-{
-  cmd="$(aws ec2 describe-instances | \
-           perl -MJSON -E \
-           '
-             my @out= <>;
-             my $json= from_json(join("", @out));
-
-             print "multi_ssh -l centos -i ~/.ssh/virginia.pem ";
-             foreach my $instance_list (@{$json->{Reservations}})
-             {
-               $instance_list= $instance_list->{Instances};
-               print join(" ", map { $_->{PublicIpAddress} } @$instance_list);
-               print " ";
-             }
-             print "\n";
-           ')"
-  $cmd
-}
-
-function ec2p
-{
-  cmd="$(ec2desc | peco | awk '{print $2}')"
-  echo ssh -l centos -i ~/.ssh/virginia.pem $cmd
-  ssh -l centos -i ~/.ssh/virginia.pem $cmd
-}
-
-function ec2desc
-{
-  aws ec2 describe-instances | \
-    perl -MJSON -E \
-    '
-      my @out= <>;
-      my $json= from_json(join("", @out));
-
-      foreach my $instance_list (@{$json->{Reservations}})
-      {
-        $instance_list= $instance_list->{Instances};
-        foreach (map { +{ pub   => $_->{PublicIpAddress},
-                          pri   => $_->{PrivateIpAddress},
-                          type  => $_->{InstanceType},
-                          state => $_->{State}->{Name},
-                          id    => $_->{InstanceId},
-                        } } @$instance_list)
-        {
-          printf("%s\t%s\t%s\t%s\t%s\n", $_->{pri}, $_->{pub}, $_->{type}, $_->{state}, $_->{id});
-        }
-      }
-    '
-} 
-
-function ec2launch
-{
-  local count="$1"
-  aws ec2 run-instances \
-    --launch-template "$ec2launch_template" \
-    --subnet="$ec2launch_subnet" \
-    --count=$count
-}
-
-function ec2term
-{
-  aws ec2 terminate-instances --instance-ids $(ec2desc | awk '{print $5}')
-}
-
 function echo_green
 {
   local msg="$*"
   echo -e "\033[32m${msg}\033[0m"
 }
-
 
 function echo_red
 {
