@@ -30,6 +30,9 @@ alias use="git checkout"
 alias rebase="git rebase"
 alias ptags="gtags --gtagslabel=pygments"
 
+ulimit -c unlimited
+alias w3m="w3m -no-mouse"
+
 if [ -f ~/.bashrc2 ] ; then
   . ~/.bashrc2
 fi
@@ -65,6 +68,74 @@ function w3mcat
 {
   w3m -T text/html "$1" | cat
 }
+
+export PATH=$PATH:/usr/mysql/8.0.40/bin
+
+alias mysql50="/usr/mysql/5.0.96/bin/mysql -uroot --default-character-set=utf8 -S /usr/mysql/5.0.96/var/mysql.sock -P 64050 --prompt=\"mysql50> \""
+alias mysqladmin50="/usr/mysql/5.0.96/bin/mysqladmin -uroot --default-character-set=utf8 -S /usr/mysql/5.0.96/var/mysql.sock -P 64050"
+alias mysqldump50="/usr/mysql/5.0.96/bin/mysqldump -uroot --default-character-set=utf8 -S /usr/mysql/5.0.96/var/mysql.sock -P 64050"
+
+alias mysql51="/usr/mysql/5.1.73/bin/mysql -uroot --default-character-set=utf8 -S /usr/mysql/5.1.73/data/mysql.sock -P 64051 --prompt=\"mysql51> \""
+alias mysqladmin51="/usr/mysql/5.1.73/bin/mysqladmin -uroot --default-character-set=utf8 -S /usr/mysql/5.1.73/data/mysql.sock -P 64051"
+alias mysqldump51="/usr/mysql/5.1.73/bin/mysqldump -uroot --default-character-set=utf8 -S /usr/mysql/5.1.73/data/mysql.sock -P 64051"
+alias mysqlslap51="/usr/mysql/5.1.73/bin/mysqlslap -uroot --default-character-set=utf8 -S /usr/mysql/5.1.73/data/mysql.sock -P 64051"
+
+alias mysql55="/usr/mysql/5.5.62/bin/mysql -uroot -S /usr/mysql/5.5.62/data/mysql.sock -P 64055 --prompt=\"mysql55> \""
+alias mysqladmin55="/usr/mysql/5.5.62/bin/mysqladmin -uroot -S /usr/mysql/5.5.62/data/mysql.sock -P 64055"
+alias mysqldump55="/usr/mysql/5.5.62/bin/mysqldump -uroot -S /usr/mysql/5.5.62/data/mysql.sock -P 64055"
+alias mysqlslap55="/usr/mysql/5.5.62/bin/mysqlslap -uroot -S /usr/mysql/5.5.62/data/mysql.sock -P 64055"
+
+alias mysql56="/usr/mysql/5.6.51/bin/mysql -uroot -S /usr/mysql/5.6.51/data/mysql.sock -P 64056 --prompt=\"mysql56> \""
+alias mysqladmin56="/usr/mysql/5.6.51/bin/mysqladmin -uroot -S /usr/mysql/5.6.51/data/mysql.sock -P 64056"
+alias mysqldump56="/usr/mysql/5.6.51/bin/mysqldump -uroot -S /usr/mysql/5.6.51/data/mysql.sock -P 64056"
+alias mysqlslap56="/usr/mysql/5.6.51/bin/mysqlslap -uroot -S /usr/mysql/5.6.51/data/mysql.sock -P 64056"
+
+alias mysql57="/usr/mysql/5.7.44/bin/mysql -uroot -S /usr/mysql/5.7.44/data/mysql.sock -P 64057 --prompt=\"mysql57 \\C> \""
+alias mysqlsh57="mysqlsh -h localhost -uroot -S /usr/mysql/5.7.44/data/mysql.sock -uroot --sql"
+alias mysqladmin57="/usr/mysql/5.7.44/bin/mysqladmin -uroot -S /usr/mysql/5.7.44/data/mysql.sock -P 64057"
+alias mysqldump57="/usr/mysql/5.7.44/bin/mysqldump -uroot -S /usr/mysql/5.7.44/data/mysql.sock -P 64057"
+alias mysqlslap57="/usr/mysql/5.7.44/bin/mysqlslap -uroot -S /usr/mysql/5.7.44/data/mysql.sock -P 64057"
+
+alias mysql80="/usr/mysql/8.0.40/bin/mysql -uroot -S /usr/mysql/8.0.40/data/mysql.sock -P 64080 --prompt=\"mysql80 \\C> \""
+alias mysqlsh80="mysqlsh -h localhost -uroot -S /usr/mysql/8.0.40/data/mysql.sock -uroot --sql"
+alias mysqladmin80="/usr/mysql/8.0.40/bin/mysqladmin -uroot -S /usr/mysql/8.0.40/data/mysql.sock -P 64080"
+alias mysqldump80="/usr/mysql/8.0.40/bin/mysqldump -uroot -S /usr/mysql/8.0.40/data/mysql.sock -P 64080"
+alias mysqlslap80="/usr/mysql/8.0.40/bin/mysqlslap -uroot -S /usr/mysql/8.0.40/data/mysql.sock -P 64080"
+
+alias mysql84="/usr/mysql/8.4.3/bin/mysql -uroot -S /usr/mysql/8.4.3/data/mysql.sock -P 64084 --prompt=\"mysql84 \\C> \""
+alias mysqlsh84="mysqlsh -h localhost -S /usr/mysql/8.4.3/data/mysql.sock -uroot --sql"
+alias mysqladmin84="/usr/mysql/8.4.3/bin/mysqladmin -uroot -S /usr/mysql/8.4.3/data/mysql.sock -P 64084"
+alias mysqldump84="/usr/mysql/8.4.3/bin/mysqldump -uroot -S /usr/mysql/8.4.3/data/mysql.sock -P 64084"
+alias mysqlslap84="/usr/mysql/8.4.3/bin/mysqlslap -uroot -S /usr/mysql/8.4.3/data/mysql.sock -P 64084"
+
+alias mysql91="/usr/mysql/9.1.0/bin/mysql -uroot -S /usr/mysql/9.1.0/data/mysql.sock -P 64091 --prompt=\"mysql91 \\C> \""
+alias mysqlsh91="mysqlsh -h localhost -uroot -S /usr/mysql/9.1.0/data/mysql.sock -uroot --sql"
+alias mysqladmin91="/usr/mysql/9.1.0/bin/mysqladmin -uroot -S /usr/mysql/9.1.0/data/mysql.sock -P 64091"
+alias mysqldump91="/usr/mysql/9.1.0/bin/mysqldump -uroot -S /usr/mysql/9.1.0/data/mysql.sock -P 64091"
+alias mysqlslap91="/usr/mysql/9.1.0/bin/mysqlslap -uroot -S /usr/mysql/9.1.0/data/mysql.sock -P 64091"
+
+function multi
+{
+  if [[ "$2" -lt "80" ]] ; then
+    multi=/usr/mysql/5.6.51/bin/mysqld_multi
+  else
+    multi=/usr/mysql/8.0.40/bin/mysqld_multi
+  fi
+  case "$1" in
+    "restart")
+      shift
+      $multi stop $*
+      sleep 10
+      $multi start $*
+      ;;
+    *)
+      $multi $*
+      ;;
+  esac
+}
+
+
+
 
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 export PATH=$PATH:~/.atuin/bin
