@@ -44,7 +44,7 @@ function vim_for_perl
 function install_atuin
 {
   curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-  ln -s $PWD/atuin.config.toml ~/.config/atuin/config.toml
+  ln -sf $PWD/atuin.config.toml ~/.config/atuin/config.toml
 }
 
 if [ "$#" = "0" ] ; then
