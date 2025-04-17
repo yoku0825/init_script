@@ -53,6 +53,7 @@ function dmysql
 {
   version_str="$1"
   shift
+  hostname="$1"
   [[ -z $version_str ]] && version_str="latest"
   version_int=$(echo $version_str | awk -F"[.-]" '{printf("%d%02d%02d\n", $1, $2, $3)}')
 
@@ -61,7 +62,16 @@ function dmysql
   else
     repo="mysql/mysql-server"
   fi
-  docker run -d --restart=on-failure -P -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" $repo:$version_str $@
+  if [[ -n $hostname && ! $hostname =~ -- ]] ; then
+    hostname_option="--hostname=$hostname --name=$hostname"
+    shift
+  else
+    hostname_option=""
+  fi
+  docker run -d --restart=on-failure --mount type=bind,source=/etc/hosts,target=/etc/hosts -P \
+             -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" \
+             $hostname_option $repo:$version_str \
+             --gtid-mode=ON --enforce-gtid-consistency=ON --lower-case-table-names $@
 }
 
 function w3mcat
