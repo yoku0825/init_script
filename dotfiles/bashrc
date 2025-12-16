@@ -71,7 +71,7 @@ function dmysql
   docker run -d --restart=on-failure --mount type=bind,source=/etc/hosts,target=/etc/hosts -P \
              -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" \
              $hostname_option $repo:$version_str \
-             --gtid-mode=ON --enforce-gtid-consistency=ON --lower-case-table-names $@
+             --gtid-mode=ON --enforce-gtid-consistency=ON --lower-case-table-names --log-error-verbosity=3 $@
 }
 
 function w3mcat
