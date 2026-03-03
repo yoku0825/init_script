@@ -2,6 +2,8 @@ set enc=utf8
 set number
 set autoindent
 set expandtab
+set tabstop=2
+set shiftwidth=2
 set wrap
 set display=lastline
 set backspace=indent,eol,start
@@ -16,6 +18,7 @@ set t_ut=
 syntax enable
 colorscheme default
 set bg=dark
+set hlsearch
 
 autocmd QuickFixCmdPost *grep* cwindow
 " autocmd VimEnter * NERDTreeToggle
