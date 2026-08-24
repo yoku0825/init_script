@@ -20,6 +20,7 @@ alias ls="ls --color"
 alias ll="ls -l"
 alias remote_ip="curl -s http://api.aoikujira.com/ip/json | jq -r .REMOTE_ADDR"
 alias tsadd="stdbuf -oL awk '{print strftime(\"[%Y/%m/%d %H:%M:%S] \"), \$0}'"
+alias btop="btop --utf-force"
 
 if [ -x /usr/local/bin/git_wrap.sh ] ; then
   alias g="/usr/local/bin/git_wrap.sh"
@@ -68,10 +69,16 @@ function dmysql
   else
     hostname_option=""
   fi
+
+  if [[ $version_int < 50700 ]] ; then
+    verbose_log="--log_warnings=2"
+  else
+    verbose_log="--log-error-verbosity=3"
+  fi
   docker run -d --restart=on-failure --mount type=bind,source=/etc/hosts,target=/etc/hosts -P \
              -e MYSQL_ALLOW_EMPTY_PASSWORD=1 -e MYSQL_ROOT_PASSWORD="""" -e MYSQL_ROOT_HOST=""%"" \
              $hostname_option $repo:$version_str \
-             --gtid-mode=ON --enforce-gtid-consistency=ON --lower-case-table-names --log-error-verbosity=3 $@
+             --gtid-mode=ON --enforce-gtid-consistency=ON --lower-case-table-names $verbose_log $@
 }
 
 function w3mcat
@@ -79,7 +86,7 @@ function w3mcat
   w3m -T text/html "$1" | cat
 }
 
-export PATH=$PATH:/usr/mysql/8.0.43/bin:~/git/ytkit/bin
+export PATH=$PATH:/usr/mysql/8.0.46/bin:~/git/ytkit/bin
 
 alias mysql50="/usr/mysql/5.0.96/bin/mysql -uroot --default-character-set=utf8 -S /usr/mysql/5.0.96/var/mysql.sock -P 64050 --prompt=\"mysql50> \""
 alias mysqladmin50="/usr/mysql/5.0.96/bin/mysqladmin -uroot --default-character-set=utf8 -S /usr/mysql/5.0.96/var/mysql.sock -P 64050"
@@ -106,32 +113,40 @@ alias mysqladmin57="/usr/mysql/5.7.44/bin/mysqladmin -uroot -S /usr/mysql/5.7.44
 alias mysqldump57="/usr/mysql/5.7.44/bin/mysqldump -uroot -S /usr/mysql/5.7.44/data/mysql.sock -P 64057"
 alias mysqlslap57="/usr/mysql/5.7.44/bin/mysqlslap -uroot -S /usr/mysql/5.7.44/data/mysql.sock -P 64057"
 
-alias mysql80="/usr/mysql/8.0.43/bin/mysql -uroot -S /usr/mysql/8.0.43/data/mysql.sock -P 64080 --prompt=\"mysql80 \\C> \""
-alias mysqlsh80="mysqlsh -h localhost -uroot -S /usr/mysql/8.0.43/data/mysql.sock -uroot --sql"
-alias mysqladmin80="/usr/mysql/8.0.43/bin/mysqladmin -uroot -S /usr/mysql/8.0.43/data/mysql.sock -P 64080"
-alias mysqldump80="/usr/mysql/8.0.43/bin/mysqldump -uroot -S /usr/mysql/8.0.43/data/mysql.sock -P 64080"
-alias mysqlslap80="/usr/mysql/8.0.43/bin/mysqlslap -uroot -S /usr/mysql/8.0.43/data/mysql.sock -P 64080"
+alias mysql80="/usr/mysql/8.0.46/bin/mysql -uroot -S /usr/mysql/8.0.46/data/mysql.sock -P 64080 --prompt=\"mysql80 \\C> \""
+alias mysqlsh80="mysqlsh -h localhost -uroot -S /usr/mysql/8.0.46/data/mysql.sock -uroot --sql"
+alias mysqladmin80="/usr/mysql/8.0.46/bin/mysqladmin -uroot -S /usr/mysql/8.0.46/data/mysql.sock -P 64080"
+alias mysqldump80="/usr/mysql/8.0.46/bin/mysqldump -uroot -S /usr/mysql/8.0.46/data/mysql.sock -P 64080"
+alias mysqlslap80="/usr/mysql/8.0.46/bin/mysqlslap -uroot -S /usr/mysql/8.0.46/data/mysql.sock -P 64080"
 
-alias mysql84="/usr/mysql/8.4.6/bin/mysql -uroot -S /usr/mysql/8.4.6/data/mysql.sock -P 64084 --prompt=\"mysql84 \\C> \""
-alias mysqlsh84="mysqlsh -h localhost -S /usr/mysql/8.4.6/data/mysql.sock -uroot --sql"
-alias mysqladmin84="/usr/mysql/8.4.6/bin/mysqladmin -uroot -S /usr/mysql/8.4.6/data/mysql.sock -P 64084"
-alias mysqldump84="/usr/mysql/8.4.6/bin/mysqldump -uroot -S /usr/mysql/8.4.6/data/mysql.sock -P 64084"
-alias mysqlslap84="/usr/mysql/8.4.6/bin/mysqlslap -uroot -S /usr/mysql/8.4.6/data/mysql.sock -P 64084"
+alias mysql84="/usr/mysql/8.4.10/bin/mysql -uroot -S /usr/mysql/8.4.10/data/mysql.sock -P 64084 --prompt=\"mysql84 \\C> \""
+alias mysqlsh84="mysqlsh -h localhost -S /usr/mysql/8.4.10/data/mysql.sock -uroot --sql"
+alias mysqladmin84="/usr/mysql/8.4.10/bin/mysqladmin -uroot -S /usr/mysql/8.4.10/data/mysql.sock -P 64084"
+alias mysqldump84="/usr/mysql/8.4.10/bin/mysqldump -uroot -S /usr/mysql/8.4.10/data/mysql.sock -P 64084"
+alias mysqlslap84="/usr/mysql/8.4.10/bin/mysqlslap -uroot -S /usr/mysql/8.4.10/data/mysql.sock -P 64084"
 
-alias mysql94="/usr/mysql/9.4.0/bin/mysql -uroot -S /usr/mysql/9.4.0/data/mysql.sock -P 64094 --prompt=\"mysql94 \\C> \""
-alias mysqlsh94="mysqlsh -h localhost -uroot -S /usr/mysql/9.4.0/data/mysql.sock -uroot --sql"
-alias mysqladmin94="/usr/mysql/9.4.0/bin/mysqladmin -uroot -S /usr/mysql/9.4.0/data/mysql.sock -P 64094"
-alias mysqldump94="/usr/mysql/9.4.0/bin/mysqldump -uroot -S /usr/mysql/9.4.0/data/mysql.sock -P 64094"
-alias mysqlslap94="/usr/mysql/9.4.0/bin/mysqlslap -uroot -S /usr/mysql/9.4.0/data/mysql.sock -P 64094"
+alias mysql97="/usr/mysql/9.7.2/bin/mysql -uroot -S /usr/mysql/9.7.2/data/mysql.sock -P 64097 --prompt=\"mysql97 \\C> \""
+alias mysqlsh97="mysqlsh -h localhost -uroot -S /usr/mysql/9.7.2/data/mysql.sock -uroot --sql"
+alias mysqladmin97="/usr/mysql/9.7.2/bin/mysqladmin -uroot -S /usr/mysql/9.7.2/data/mysql.sock -P 64097"
+alias mysqldump97="/usr/mysql/9.7.2/bin/mysqldump -uroot -S /usr/mysql/9.7.2/data/mysql.sock -P 64097"
+alias mysqlslap97="/usr/mysql/9.7.2/bin/mysqlslap -uroot -S /usr/mysql/9.7.2/data/mysql.sock -P 64097"
+
+alias mysql2607="/usr/mysql/26.7.0/bin/mysql -uroot -S /usr/mysql/26.7.0/data/mysql.sock -P 64267 --prompt=\"mysql267 \\C> \""
+alias mysqlsh2607="mysqlsh -h localhost -uroot -S /usr/mysql/26.7.0/data/mysql.sock -uroot --sql"
+alias mysqladmin2607="/usr/mysql/26.7.0/bin/mysqladmin -uroot -S /usr/mysql/26.7.0/data/mysql.sock -P 64267"
+alias mysqldump2607="/usr/mysql/26.7.0/bin/mysqldump -uroot -S /usr/mysql/26.7.0/data/mysql.sock -P 64267"
+alias mysqlslap2607="/usr/mysql/26.7.0/bin/mysqlslap -uroot -S /usr/mysql/26.7.0/data/mysql.sock -P 64267"
+
+
 
 function multi
 {
   #if [[ "$2" -lt "80" ]] ; then
   #  multi=/usr/mysql/5.6.51/bin/mysqld_multi
   #else
-  #  multi=/usr/mysql/8.0.43/bin/mysqld_multi
+  #  multi=/usr/mysql/8.0.46/bin/mysqld_multi
   #fi
-  multi=/usr/mysql/8.0.43/bin/mysqld_multi
+  multi=/usr/mysql/8.0.46/bin/mysqld_multi
   case "$1" in
     "restart")
       shift
@@ -151,3 +166,8 @@ function multi
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 export PATH=$PATH:~/.atuin/bin
 which atuin > /dev/null 2>&1 && eval "$(atuin init bash --disable-up-arrow)"
+
+export PATH=/home/yoku0825/bin:$PATH
+
+[[ -e "/home/yoku0825/oci-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/yoku0825/oci-cli/lib/python3.6/site-packages/oci_cli/bin/oci_autocomplete.sh"
+export PATH="/home/yoku0825/.local/bin:$PATH"
